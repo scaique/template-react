@@ -3,6 +3,7 @@
 const { execSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
+const rimraf = require("rimraf");
 
 // Obtém os argumentos passados
 const args = process.argv.slice(2);
@@ -21,25 +22,14 @@ console.log(`\nClonando o template para ${projectPath}...\n`);
 // Clona o repositório template
 execSync(`git clone https://github.com/scaique/template-react.git ${projectPath}`, { stdio: "inherit" });
 
-// Função para remover diretórios de forma recursiva
-function removeDirectory(dirPath) {
-    if (fs.existsSync(dirPath)) {
-        fs.readdirSync(dirPath).forEach((file) => {
-            const currentPath = path.join(dirPath, file);
-            if (fs.lstatSync(currentPath).isDirectory()) {
-                removeDirectory(currentPath);
-            } else {
-                fs.unlinkSync(currentPath); // Remove o arquivo
-            }
-        });
-        fs.rmdirSync(dirPath); // Remove o diretório
-    }
-}
-
 // Remove o histórico do Git
 const gitPath = path.join(projectPath, ".git");
-console.log("\nRemovendo histórico do Git...\n");
-removeDirectory(gitPath);
+if (fs.existsSync(gitPath)) {
+    console.log("\nRemovendo histórico do Git...\n");
+    rimraf.sync(gitPath); // Usando rimraf para remover o diretório
+} else {
+    console.log("\nNenhum diretório .git encontrado para remover.\n");
+}
 
 // Finaliza o processo com mensagem
 console.log("Template clonado com sucesso!");
