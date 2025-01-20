@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Template para projetos React com Vite e TailwindCSS.",
+  "main": "index.cjs",
   "author": "Caique scaique@gmail.com",
   "license": "MIT",
   "keywords": [
