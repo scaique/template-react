@@ -26,7 +26,13 @@ execSync(`git clone https://github.com/scaique/template-react.git ${projectPath}
 const gitPath = path.join(projectPath, ".git");
 if (fs.existsSync(gitPath)) {
     console.log("\nRemovendo histórico do Git...\n");
+    console.log(`Diretório: ${gitPath}\n`);
     rimraf.sync(gitPath); // Usando rimraf para remover o diretório
+    if (fs.existsSync(gitPath)) {
+        fs.unlinkSync(gitPath); // Se rimraf falhar, tenta remover o arquivo diretamente
+    } else {
+        console.log("\nHistórico do Git removido com sucesso.\n");
+    }
 } else {
     console.log("\nNenhum diretório .git encontrado para remover.\n");
 }
