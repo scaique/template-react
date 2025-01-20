@@ -1,8 +1,14 @@
 {
-  "name": "portfolio",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@caique-blue/template-react",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Template para projetos React com Vite e TailwindCSS.",
+  "author": "Caique scaique@gmail.com",
+  "license": "MIT",
+  "keywords": ["react", "vite", "template", "tailwindcss"],
+  "bin": {
+    "create-template-react": "./index.cjs"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
